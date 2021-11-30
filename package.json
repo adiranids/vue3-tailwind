@@ -1,6 +1,6 @@
 {
   "name": "@adiranids/vue3-tailwind",
-  "version": "1.1.0",
+  "version": "1.0.2",
   "license": "MIT",
   "description": "Vue 3 Styled Components Library using Tailwind CSS.",
   "main": "dist/ards-vue3-tailwind.ssr.js",
@@ -8,6 +8,7 @@
   "module": "dist/ards-vue3-tailwind.esm.js",
   "unpkg": "dist/ards-vue3-tailwind.min.js",
   "types": "dist/types/src/entry.esm.d.ts",
+  "homepage": "https://app.adiranids.com/vue-components/",
   "files": [
     "dist/*",
     "src/**/*.vue",
@@ -61,5 +62,9 @@
   },
   "engines": {
     "node": ">=12"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adiranids/vue3-tailwind.git"
   }
 }
