@@ -1,6 +1,6 @@
 {
   "name": "@adiranids/vue3-tailwind",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "license": "MIT",
   "description": "Vue 3 Styled Components Library using Tailwind CSS.",
   "files": ["dist"],
