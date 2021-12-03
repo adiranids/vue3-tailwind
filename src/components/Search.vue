@@ -26,7 +26,7 @@
         type="search"
         :value="modelValue"
         :placeholder="placeholder"
-        @input="$emit('update:modelValue', $event.target.value)"
+        @input="passInput"
         class="p-2 ml-12 focus:outline-none h-full border-none transition-all duration-200 ease-in-out border w-11/12"
       />
     </div>
@@ -42,7 +42,7 @@
           v-for="(item, index) in searchResult"
           class="w-full p-2 cursor-pointer transition-all duration-200 ease-in-out"
           :class="`${bordered ? 'border-b-2' : ''} ${resultListClasses}`"
-          :key="index + randIndex"
+          :key="index"
         >
           {{ resultKey != "" ? item[resultKey] : item }}
         </li>
@@ -100,12 +100,9 @@ export default defineComponent({
     }
   },
 
-  setup(props) {
-    const start = ref(0);
-    const randIndex = computed(() => {
-      start.value += start.value;
-      return start.value + 10;
-    });
+  emits: ['udpate:modelValue'],
+
+  setup(props, {emit} : any) {
     const show = ref<boolean>(false);
     watch(
       () => props.searchResult,
@@ -114,14 +111,19 @@ export default defineComponent({
       }
     );
 
-    function callBackFunction() {
+    function callBackFunction() : void {
       show.value = false;
       props.resultCallBack();
     }
 
+    function passInput(e : Event) : void{
+      const target = e.target as HTMLInputElement
+      emit('update:modelValue', target.value)
+    }
+
     return {
+      passInput,
       callBackFunction,
-      randIndex,
       show,
     };
   },
