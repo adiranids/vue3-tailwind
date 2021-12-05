@@ -9,3 +9,6 @@ export { default as TR } from './TR.vue';
 export { default as TD } from './TD.vue';
 export { default as Search } from './Search.vue';
 export { default as VCard } from './VCard.vue';
+
+export {default as FormGroup} from './FormGroup.vue'
+export {default as Form} from './Form.vue'

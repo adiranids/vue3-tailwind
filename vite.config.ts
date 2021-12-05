@@ -13,6 +13,7 @@ export default defineConfig({
     rollupOptions: {
       external: ['vue'],
       output: {
+        inlineDynamicImports: true,
         // Provide global variables to use in the UMD build
         // Add external deps here
         globals: {
@@ -20,6 +21,9 @@ export default defineConfig({
         },
       },
     },
+  },
+  server:{
+    port: 3030
   },
   plugins: [vue()]
 })
