@@ -1,11 +1,11 @@
 <template>
-  <h1 v-bind="$attrs" :class="className">
+  <h1 v-bind="$attrs" :class="size">
     <slot />
   </h1>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed } from "vue";
+import { defineComponent } from "vue";
 export default defineComponent({
   props: {
     size: {
@@ -16,28 +16,18 @@ export default defineComponent({
       required: true,
     },
   },
-
-  setup(props) {
-    const sizeClassMapArray = ref<Record<string, string>>({
-      "h1": "md:text-3xl text-2xl",
-
-      "h2": "md:text-2xl text-xl",
-
-      "h3": "md:text-xl text-lg",
-
-      "small": "text-sm",
-
-      "normal": "text-base",
-    });
-
-
-    const className = computed (()=> sizeClassMapArray.value[props.size])
-
-
-    return {
-        sizeClassMapArray,
-        className
-    }
-  },
 });
 </script>
+<style scoped>
+.h1{
+  @apply md:text-3xl text-2xl;
+}
+.h2{
+  @apply md:text-2xl text-xl;
+}
+  .h3{@apply md:text-xl text-lg;}
+
+  .small{ @apply text-sm;}
+
+  .normal{ @apply text-base;}
+</style>

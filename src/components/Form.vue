@@ -1,5 +1,5 @@
 <template>
-  <form v-bind="$attrs" class='flex flex-col space-y-5 p-3'>
+  <form v-bind="$attrs" class='form'>
       <slot />
   </form>
 </template>
@@ -10,3 +10,8 @@ export default defineComponent({
   name: "Form",
 });
 </script>
+<style scoped>
+.form {
+  @apply flex flex-col space-y-5 p-3;
+}
+</style>

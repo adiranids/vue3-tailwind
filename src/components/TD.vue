@@ -1,5 +1,5 @@
 <template>
-    <td class="px-6 py-4 whitespace-nowrap">
+    <td class="td-default">
         <slot />
     </td>
 </template>
@@ -10,3 +10,9 @@ export default defineComponent({
     name: 'TD'
 })
 </script>
+
+<style scoped>
+.td-default{
+    @apply px-6 py-4 whitespace-nowrap;
+}
+</style>

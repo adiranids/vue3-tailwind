@@ -1,17 +1,12 @@
 <template>
-  <div class="flex flex-col space-y-1">
+  <div class="form-group-wrapper">
     <div
       v-bind="$attrs"
-      :class="`w-full flex ${
-        row
-          ? 'flex-row items-center md:flex-nowrap flex-wrap md:space-x-3'
-          : 'flex-col space-y-1'
-      }`"
+      :class="`form-group-default ${row ? 'form-group-row' : 'form-group-col'}`"
     >
-      <Label
-        :class="`${row ? 'md:pr-2 md:w-1/4 w-full' : 'pb-2'} ${labelClasses}`"
-        >{{ label }}</Label
-      >
+      <Label :class="`${row ? 'label-row' : 'label-col'} ${labelClasses}`">{{
+        label
+      }}</Label>
       <input
         :type="type"
         :value="modelValue"
@@ -20,14 +15,8 @@
         @input="passValue"
         :class="`
             ${inputClasses} 
-            p-2
-            border
-            focus:outline-none
-            rounded
-            transition-all
-            duration-200
-            ease-in-out
-            ${row ? 'md:w-3/4 w-full' : 'w-full'}
+            input-default
+            ${row ? 'input-row' : 'input-col'}
             `"
       />
     </div>
@@ -74,7 +63,7 @@ export default defineComponent({
     },
     type: {
       type: String,
-      default: 'text',
+      default: "text",
       validator: (propValue: string): boolean => {
         return (
           [
@@ -115,9 +104,9 @@ export default defineComponent({
       default: "",
     },
     required: {
-        type: Boolean,
-        default: false
-    }
+      type: Boolean,
+      default: false,
+    },
   },
   emits: ["update:modelValue"],
   setup(props, { emit }) {
@@ -126,19 +115,56 @@ export default defineComponent({
       emit("update:modelValue", target.value);
     }
 
-  
-    const errorVal = computed(()=>{
-        if (props.confirm && props.modelValue != props.confirmWith && props.modelValue) 
-            return props.error || "Confirm password and password needs to be the same";
-        else if (props.confirm && props.modelValue == props.confirmWith)
-            return "";
-        else if(!props.confirm)
-            return props.error
-    })
-
-
+    const errorVal = computed(() => {
+      if (
+        props.confirm &&
+        props.modelValue != props.confirmWith &&
+        props.modelValue
+      )
+        return (
+          props.error || "Confirm password and password needs to be the same"
+        );
+      else if (props.confirm && props.modelValue == props.confirmWith)
+        return "";
+      else if (!props.confirm) return props.error;
+    });
 
     return { passValue, errorVal };
   },
 });
 </script>
+<style scoped>
+.form-group-wrapper {
+  @apply flex flex-col space-y-1;
+}
+.form-group-default {
+  @apply w-full flex;
+}
+.form-group-row {
+  @apply flex-row items-center md:flex-nowrap flex-wrap md:space-x-3;
+}
+.form-group-col {
+  @apply flex-col space-y-1;
+}
+.label-row {
+  @apply md:pr-2 md:w-1/4 w-full;
+}
+.label-col {
+  @apply pb-2;
+}
+.input-default {
+  @apply p-2
+            border
+            focus:outline-none
+            rounded
+            transition-all
+            duration-200
+            ease-in-out;
+}
+.input-row {
+  @apply md:w-3/4 w-full;
+}
+.input-col {
+  @apply w-full;
+}
+</style>

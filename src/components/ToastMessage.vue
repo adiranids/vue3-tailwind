@@ -1,11 +1,11 @@
 <template>
-    <div v-bind="$attrs" :class="typeClass">
+    <div v-bind="$attrs" :class="type">
         <slot />
     </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
     props:{
@@ -17,19 +17,17 @@ export default defineComponent({
             default: 'normal'
         }
     },
-    setup(props){
-        const typeClass = computed(() => {
-            if(props.type == 'error')
-            return 'text-red-500'
-            else if(props.type =="success")
-            return 'text-green-500'
-            else if(props.type == "normal")
-            return 'text-base'
-        })
-
-        return {
-            typeClass
-        }
-    }
 })
 </script>
+
+<style scoped>
+.error {
+    @apply text-red-500;
+}
+.success{
+    @apply text-green-500;
+}
+.normal{
+    @apply text-base;
+}
+</style>

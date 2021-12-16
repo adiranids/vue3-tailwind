@@ -3,7 +3,7 @@
     v-bind="$attrs"
     :value="props.modelValue"
     @input="passValue"
-    class="p-2 focus:outline-none rounded shadow transition-all duration-200 ease-in-out"
+    class="input-default"
   />
 </template>
 
@@ -31,3 +31,9 @@ function passValue(e : Event) : void
 }
 
 </script>
+
+<style scoped>
+.input-default {
+@apply p-2 focus:outline-none rounded shadow transition-all duration-200 ease-in-out;
+}
+</style>

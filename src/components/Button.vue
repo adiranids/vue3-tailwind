@@ -1,9 +1,8 @@
 <template>
   <button
-    :class="`${typeMap[buttonType]} ${
-      pillShape ? 'rounded-full' : 'rounded'
-    } ${buttonType}-ringoutline px-5 
-    py-2 font-semibold focus:outline-none focus:ring-1`"
+    :class="`${typeClass} ${
+      pillShape ? 'rounded-circle' : 'rounded-corner'
+    } ${buttonType}-ringoutline button`"
     v-bind="$attrs"
   >
     <slot />
@@ -11,7 +10,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, computed } from "vue";
 
 export default defineComponent({
   props: {
@@ -49,32 +48,11 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const typeMap = ref<Record<string, string>>({
-      primary: props.gradient
-        ? `bg-gradient-to-${props.gradientDirection} from-blue-400 to-blue-500 text-gray-50`
-        : `bg-blue-400 text-gray-50`,
-      danger: props.gradient
-        ? `bg-gradient-to-${props.gradientDirection} from-red-400 to-red-500 text-gray-50`
-        : `bg-red-400 text-gray-50`,
-      success: props.gradient
-        ? `bg-gradient-to-${props.gradientDirection} from-green-400 to-green-500 text-gray-50`
-        : `bg-green-400 text-gray-50`,
-      dark: props.gradient
-        ? `bg-gradient-to-${props.gradientDirection} from-gray-800 to-gray-900 text-gray-50`
-        : `bg-gray-900 text-gray-50`,
-      light: props.gradient
-        ? `bg-gradient-to-${props.gradientDirection} from-gray-50 to-gray-100 text-gray-700`
-        : `bg-gray-100 text-gray-700`,
-      warning: props.gradient
-        ? `bg-gradient-to-${props.gradientDirection} from-yellow-400 to-yellow-500 text-gray-50`
-        : `bg-yellow-400 text-gray-50`,
-      secondary: props.gradient
-        ? `bg-gradient-to-${props.gradientDirection} from-gray-500 to-gray-600 text-gray-50`
-        : `bg-gray-600 text-gray-50`,
-    });
-
+    const typeClass = computed(()=>{
+      return props.gradient ? `gradient-${props.gradientDirection} ${props.buttonType}-gradient` : props.buttonType
+    })
     return {
-      typeMap,
+      typeClass,
     };
   },
 });
@@ -101,5 +79,76 @@ export default defineComponent({
 .warning-ringoutline{
     @apply ring-yellow-600;
 }
+.button{
+    @apply px-5 
+    py-2 font-semibold focus:outline-none focus:ring-1;
+}
+.rounded-circle{
+    @apply rounded-full;
+}
+.rounded-corner{
+    @apply rounded;
+}
+.gradient-r{
+    @apply bg-gradient-to-r; 
+}
 
+.gradient-l{
+    @apply bg-gradient-to-l; 
+}
+
+.gradient-t{
+    @apply bg-gradient-to-t; 
+}
+.gradient-b{
+    @apply bg-gradient-to-b; 
+}
+.primary-gradient{
+    @apply from-blue-400 to-blue-500 text-gray-50;
+}
+
+.warning-gradient{
+    @apply from-yellow-400 to-yellow-500 text-gray-50;
+}
+
+.secondary-gradient{
+    @apply from-gray-500 to-gray-600 text-gray-50;
+}
+
+.danger-gradient{
+    @apply from-red-400 to-red-500 text-gray-50;
+}
+
+.success-gradient{
+    @apply from-green-400 to-green-500 text-gray-50;
+}
+.dark-gradient{
+    @apply  from-gray-800 to-gray-900 text-gray-50;
+}
+.light-gradient{
+    @apply from-gray-50 to-gray-100 text-gray-700;
+}
+
+.primary{
+    @apply bg-blue-400 text-gray-50;
+}
+.danger{
+    @apply bg-red-400 text-gray-50;
+}
+.warning{
+    @apply bg-yellow-400 text-gray-50;
+}
+.secondary{
+    @apply bg-gray-600 text-gray-50;
+}
+.success{
+    @apply bg-green-400 text-gray-50;
+}
+
+.dark{
+@apply bg-gray-900 text-gray-50;
+}
+.light{
+    @apply bg-gray-100 text-gray-700;
+}
 </style>

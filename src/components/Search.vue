@@ -1,8 +1,8 @@
 <template>
-  <div class="flex flex-col" v-bind="$attrs">
-    <div class="w-full flex items-center relative px-2 border" 
+  <div class="search-wrapper" v-bind="$attrs">
+    <div class="search-input-container" 
     :class="inputClasses">
-      <div class="w-5 h-5 ml-2" v-if="defaultIcon">
+      <div class="icon-container" v-if="defaultIcon">
         <svg
           class="svg-inline--fa fa-magnifying-glass"
           aria-hidden="true"
@@ -27,12 +27,12 @@
         :value="modelValue"
         :placeholder="placeholder"
         @input="passInput"
-        class="p-2 ml-12 focus:outline-none h-full border-none transition-all duration-200 ease-in-out border w-11/12"
+        class="search-input"
       />
     </div>
 
     <ul
-      class="w-full border space-y-1 rounded-b transition-all duration-200 ease-in-out"
+      class="list-container"
       v-if="show"
       :class="resultContainerClasses"
     >
@@ -40,7 +40,7 @@
         <li
           @click="callBackFunction"
           v-for="(item, index) in searchResult"
-          class="w-full p-2 cursor-pointer transition-all duration-200 ease-in-out"
+          class="list-item"
           :class="`${bordered ? 'border-b-2' : ''} ${resultListClasses}`"
           :key="index"
         >
@@ -52,7 +52,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, ref, watch } from "vue";
+import { defineComponent, ref, watch } from "vue";
 
 export default defineComponent({
   inheritAttrs: false,
@@ -138,5 +138,23 @@ export default defineComponent({
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+.search-wrapper{
+  @apply flex flex-col;
+}
+.search-input-container{
+  @apply w-full flex items-center relative px-2 border;
+}
+.icon-container{
+  @apply w-5 h-5 ml-2;
+}
+.search-input{
+  @apply p-2 ml-12 focus:outline-none h-full border-none transition-all duration-200 ease-in-out border w-11/12;  
+}
+.list-container{
+  @apply w-full border space-y-1 rounded-b transition-all duration-200 ease-in-out;
+}
+.list-item{
+  @apply w-full p-2 cursor-pointer transition-all duration-200 ease-in-out;
 }
 </style>
