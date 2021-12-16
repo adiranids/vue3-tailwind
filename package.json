@@ -1,6 +1,6 @@
 {
   "name": "@adiranids/vue3-tailwind",
-  "version": "1.0.7-beta",
+  "version": "1.0.7-beta.1",
   "license": "MIT",
   "description": "Vue 3 Styled Components Library using Tailwind CSS.",
   "files": [
@@ -12,6 +12,10 @@
     ".": {
       "import": "./dist/adiranidsvue3tailwind.es.js",
       "require": "./dist/adiranidsvue3tailwind.umd.js"
+    },
+    "./dist/style.css": {
+      "import": "./dist/style.css",
+      "require": "./dist/style.css"
     }
   },
   "scripts": {
