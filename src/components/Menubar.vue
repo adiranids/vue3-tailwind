@@ -1,5 +1,5 @@
 <template>
-    <div v-bind="$attrs" class="w-full transition-all ease-in-out duration-150" :class="ardsMenuOpen ? 'h-screen' : props.heightClass ">
+    <div v-bind="$attrs" class="menubar" :class="ardsMenuOpen ? 'full-height' : props.heightClass ">
         <slot />
     </div>
 </template>
@@ -30,3 +30,11 @@ watch(ardsMenuOpen, ()=>{
 
 </script>
 
+<style scoped>
+.menubar{
+    @apply w-full transition-all ease-in-out duration-150;
+}
+.full-height{
+    @apply h-screen;
+}
+</style>
